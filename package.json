@@ -1,0 +1,100 @@
+{
+  "name": "txt-read",
+  "displayName": "txt-read",
+  "description": "TXT reading tool",
+  "publisher": "mtnsea",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "txt-read.restart",
+        "title": "txt-read.Restart"
+      }
+    ],
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "TxtRead_Panel",
+          "title": "TXTRead",
+          "icon": "media/fish.svg"
+        }
+      ]
+    },
+    "views": {
+      "TxtRead_Panel": [
+        {
+          "type": "webview",
+          "id": "TxtRead_Panel_Read",
+          "name": "阅读"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "TXT-Read",
+      "type": "object",
+      "properties": {
+        "TXT-Read.pageNumber": {
+          "type": "number",
+          "default": 1,
+          "description": "当前TXT页数(支持跳转)"
+        },
+        "TXT-Read.pageSize": {
+          "type": "number",
+          "default": 20,
+          "description": "当前TXT显示行数"
+        },
+        "TXT-Read.filePath": {
+          "type": "string",
+          "default": "",
+          "description": "TXT格式的文件路径或目录(绝对路径)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package:vsce": "pnpm vsce package --no-dependencies",
+    "package": "webpack --mode production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
+    "clear": "rimraf ./dist",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.7",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^8.3.0",
+    "@typescript-eslint/parser": "^8.3.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.1.1",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.9.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "sass": "^1.79.4",
+    "sass-loader": "^16.0.2",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.5.4",
+    "vue-loader": "^17.4.2",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "vue": "^3.5.11"
+  }
+}
